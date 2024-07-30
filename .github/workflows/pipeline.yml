@@ -20,16 +20,16 @@ jobs:
 
       - name: Terraform Init
         env:
-          ACCESS_KEY : ${{ secrets.ACCESS_KEY }}
-          SECRET_KEY : ${{ secrets.SECRET_KEY }}
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var-file=main.tf
+        run: terraform apply -auto-approve -var-file=terraform.tfvars
         working-directory: ./
 
       - name: Terraform Apply Helm Provider
-        run: terraform apply -auto-approve -var-file=helm_provider.tf
+        run: terraform apply -auto-approve -var-file=terraform.tfvars
         working-directory: ./
 
       - name: Terraform Output
