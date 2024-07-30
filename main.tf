@@ -3,7 +3,7 @@ provider "aws" {
 
   profile = "default"
   assume_role {
-    role_arn = "arn:aws:iam::471112841349:role/barchpipe"
+    role_arn = "arn:aws:iam::471112841349:user/leonardobarchilon@gmail.com"
     session_name = "terraform"
   }
 }
