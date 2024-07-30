@@ -1,7 +1,7 @@
 provider "aws" {
   region  = var.region
 
-  profile = "barchpipe"
+  profile = "default"
   assume_role {
     role_arn = "arn:aws:iam::471112841349:role/barchpipe"
     session_name = "terraform"
