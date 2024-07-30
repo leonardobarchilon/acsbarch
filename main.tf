@@ -1,5 +1,11 @@
 provider "aws" {
-  region = var.region
+  region  = var.region
+
+  profile = "my-role"
+  assume_role {
+    role_arn = "arn:aws:iam::471112841349:role/barchpipe"
+    session_name = "terraform"
+  }
 }
 
 module "vpc" {
