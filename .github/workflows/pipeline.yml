@@ -8,10 +8,7 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -22,14 +19,17 @@ jobs:
           terraform_version: 1.9.3
 
       - name: Terraform Init
+        env:
+          ACCESS_KEY : ${{ secrets.ACCESS_KEY }}
+          SECRET_KEY : ${{ secrets.SECRET_KEY }}
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -file=main.tf
+        run: terraform apply -auto-approve -var-file=main.tf
         working-directory: ./
 
       - name: Terraform Apply Helm Provider
-        run: terraform apply -auto-approve -file=helm_provider.tf
+        run: terraform apply -auto-approve -var-file=helm_provider.tf
         working-directory: ./
 
       - name: Terraform Output
