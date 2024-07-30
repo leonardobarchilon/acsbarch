@@ -8,7 +8,7 @@ data "aws_eks_cluster_auth" "this" {
 
 locals {
   oidc_url = data.aws_eks_cluster.this.identity[0].oidc[0].issuer
-  oidc_id  = element(split("/", local.oidc_url), 3) # Pega o 7º elemento após a divisão por "/"
+  oidc_id  = element(split("/", local.oidc_url), 3) # Pega o 4º elemento após a divisão por "/"
 }
 
 module "aws_load_balancer_controller_irsa_role" {
@@ -22,7 +22,6 @@ module "aws_load_balancer_controller_irsa_role" {
     oidc_providers = {
         ex = { 
             provider_arn               = "arn:aws:iam::471112841349:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/${local.oidc_id}"
-#            provider_arn                = data.aws_eks_cluster.this.identity[0].oidc[0].issuer
             namespace_service_accounts  = ["kube-system:aws-load-balancer-controller"]
         }
     }

@@ -1,5 +1,7 @@
 provider "aws" {
   region = var.region
+  access_key = secrets.ACCESS_KEY_ID
+  secret_key = secrets.SECRET_ACCESS_KEY 
 }
 
 module "vpc" {
@@ -50,27 +52,3 @@ resource "aws_eks_node_group" "this" {
   instance_types = [var.instance_type]
 }
 
-#provider "kubernetes" {
-#  config_path = "~/.kube/config"
-#}
-#
-#resource "kubernetes_service" "lb-frontend" {
-#  metadata {
-#    name      = "lb-frontend"
-#    namespace = "sock-shop"
-#    annotations = {
-#      "service.beta.kubernetes.io/aws-load-balancer-type" = "external"
-#   }
-#  }
-#  spec {
-#    type = "LoadBalancer"
-#    selector = {
-#      app = "front-end"
-#    }
-#    port {
-#      port        = 80
-#      target_port = 80
-#      protocol    = "TCP"
-#    }
-#  }
-#}
