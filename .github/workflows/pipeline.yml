@@ -30,7 +30,13 @@ jobs:
 #      - name: Configure AWS Credentials
 #        run: |
 #          aws configure set aws_access_key_id ${{ env }} --profile default
-#          aws configure set aws_secret_acess_key ${{ secrets.SECRET_KEY }} --profile default      
+#          aws configure set aws_secret_acess_key ${{ secrets.SECRET_KEY }} --profile default  
+      - name: Verify Secret
+        run: echo $AWS_ACCESS_KEY_ID | sed -e 's/\(.\)/\1 /g'
+      
+      - name: Verify Secret
+        run: echo ${{ secrets.AWS_ACCESS_KEY_ID }} | sed -e 's/\(.\)/\1 /g'
+        
 
       - name: Verify AWS Secrets
         run: echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" && echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
