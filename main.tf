@@ -1,8 +1,7 @@
 provider "aws" {
-  region  = var.region
-  shared_credentials_files = ["/home/barchilon/.aws/credentials"]
   shared_config_files = ["/home/barchilon/.aws/config"]
-  profile = "barchpipe"
+  shared_credentials_files = ["/home/barchilon/.aws/credentials"]
+  region  = var.region
 
 #  profile = "default"
 #  assume_role {
