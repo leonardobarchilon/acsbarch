@@ -34,11 +34,20 @@ jobs:
       - name: Verify AWS Secrets
         run: echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" && echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
+      - name: Verify AWS Env
+        run: echo "AWS_ACCESS_KEY_ID=${{ env.ACCESS_KEY }}" && echo "AWS_SECRET_ACCESS_KEY=${{ env.SECRET_KEY }}"
+
       - name: Debug Environment
         run: env | grep AWS
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Debug Environment
+        run: env | grep AWS
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.SECRET_KEY }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
