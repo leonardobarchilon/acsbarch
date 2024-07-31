@@ -1,7 +1,7 @@
 provider "aws" {
+  region  = var.region
   shared_config_files = ["/home/barchilon/.aws/config"]
   shared_credentials_files = ["/home/barchilon/.aws/credentials"]
-  region  = var.region
   profile = "default"
 
 #  profile = "default"
