@@ -1,6 +1,6 @@
 provider "aws" {
   region  = var.region
-  shared_credentials_files = "/home/barchilon/.aws/credentials"
+  shared_credentials_files = ["/home/barchilon/.aws/credentials"]
   profile = "default"
 
 #  profile = "default"
