@@ -34,7 +34,7 @@ jobs:
       - name: Verify Secret Bash
         shell: bash
         env:
-          AWS_ACCESS: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_ACCESS: ${{ env.ACCESS_KEY }}
         run: |
           echo "$AWS_ACCESS"
         
