@@ -1,6 +1,6 @@
 provider "aws" {
-  shared_config_files = "${AWS_SHARED_CONFIG_FILE}"
-  shared_credentials_files = "${AWS_SHARED_CREDENTIALS_FILE}"
+  shared_config_files = [var.aws_shared_config_file]
+  shared_credentials_files = [var.aws_shared_credentials_file]
   profile = "default"
   region  = var.region
 
