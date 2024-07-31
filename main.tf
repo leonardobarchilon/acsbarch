@@ -1,11 +1,11 @@
 provider "aws" {
   region  = var.region
 
-  profile = "default"
-  assume_role {
-    role_arn = "arn:aws:iam::471112841349:user/leonardobarchilon@gmail.com"
-    session_name = "terraform"
-  }
+#  profile = "default"
+#  assume_role {
+#    role_arn = "arn:aws:iam::471112841349:user/leonardobarchilon@gmail.com"
+#    session_name = "terraform"
+#  }
 }
 
 
