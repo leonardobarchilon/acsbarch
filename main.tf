@@ -1,13 +1,13 @@
 provider "aws" {
-#  shared_config_files = ["/home/barchilon/.aws/config"]
-#  shared_credentials_files = ["/home/barchilon/.aws/credentials"]
-#  region  = var.region
+  shared_config_files = ["/home/barchilon/.aws/config"]
+  shared_credentials_files = ["/home/barchilon/.aws/credentials"]
+  region  = var.region
 
-#  profile = "default"
-#  assume_role {
-#    role_arn = "arn:aws:iam::471112841349:user/leonardobarchilon@gmail.com"
-#    session_name = "terraform"
-#  }
+  profile = "default"
+  assume_role {
+    role_arn = "arn:aws:iam::471112841349:user/leonardobarchilon@gmail.com"
+    session_name = "terraform"
+  }
 }
 
 
