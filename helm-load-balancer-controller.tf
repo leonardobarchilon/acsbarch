@@ -6,13 +6,13 @@ data "aws_eks_cluster" "main" {
 ]
 }
 
-data "aws_eks_cluster_auth" "this" {
-    name = var.cluster_name
-
-    depends_on = [
-    aws_eks_cluster.main
-]
-}
+#data "aws_eks_cluster_auth" "this" {
+#    name = var.cluster_name
+#
+#    depends_on = [
+#    aws_eks_cluster.main
+#]
+#}
 
 locals {
   oidc_url = data.aws_eks_cluster.main.identity[0].oidc[0].issuer

@@ -78,4 +78,8 @@ resource "aws_iam_policy_attachment" "alb_controller_policy" {
   name = "alb-controller-role"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   roles       = ["alb-controller-role"]
+
+  depends_on = [
+    alb-controller-role.alb_controller
+]
 }
