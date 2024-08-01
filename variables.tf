@@ -61,12 +61,3 @@ variable "node_role_name" {
   default     = "eks-node-role"
 }
 
-#variable "aws_shared_config_file" {
-#  type = string
-#  default = "/home/barchilon/.aws/config"
-#}
-
-#variable "aws_shared_credentials_file" {
-#  type = string
-##  default = "/home/barchilon/.aws/credentials"
-#}
