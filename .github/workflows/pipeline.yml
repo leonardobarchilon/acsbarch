@@ -18,7 +18,7 @@ env:
   profile: "default"
 
 jobs:
-  terraform:
+  set-terraform-up:
     runs-on: ubuntu-latest
     environment: aws
     
@@ -34,12 +34,11 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Destroy Terraform
-        run: terraform destroy -auto-approve
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  provisioning-eks:
+    runs-on: ubuntu-latest
+    environment: aws
 
+    steps:
       - name: Terraform Apply
         run: terraform apply -auto-approve -var-file=terraform.tfvars
         working-directory: ./
@@ -47,13 +46,23 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Terraform Apply Helm Provider
-        run: terraform apply -auto-approve -var-file=terraform.tfvars
-        working-directory: ./
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  provisioning-helm-provider:
+    runs-on: ubuntu-latest
+    environment: aws
 
+    steps:
+    - name: Terraform Apply Helm Provider
+      run: terraform apply -auto-approve -var-file=terraform.tfvars
+      working-directory: ./
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  outputs:
+    runs-on: ubuntu-latest
+    environment: aws
+
+    steps:
       - name: Terraform Output
         run: terraform output
         working-directory: ./
