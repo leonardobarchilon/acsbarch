@@ -80,6 +80,6 @@ resource "aws_iam_policy_attachment" "alb_controller_policy" {
   roles       = ["alb-controller-role"]
 
   depends_on = [
-    alb_controller.this
+    aws_iam_role.alb_controller
 ]
 }
