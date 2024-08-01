@@ -35,7 +35,7 @@ resource "aws_eks_cluster" "main" {
 }
 
 resource "aws_eks_node_group" "this" {
-  cluster_name    = aws_eks_cluster.this.name
+  cluster_name    = aws_eks_cluster.main.name
   node_group_name = var.node_group_name
   node_role_arn   = module.iam.node_role_arn
   subnet_ids      = module.vpc.private_subnet_ids
