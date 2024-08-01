@@ -1,15 +1,6 @@
 provider "aws" {
-#  shared_config_files = ["/home/barchilon/.aws/config"]
-#  shared_credentials_files = ["/home/barchilon/.aws/credentials"]
-#  region  = var.region
-#
-#  profile = "default"
-#  assume_role {
-#    role_arn = "arn:aws:iam::471112841349:user/leonardobarchilon@gmail.com"
-#    session_name = "terraform"
-#  }
+  region  = var.region
 }
-
 
 module "vpc" {
   source = "./modules/vpc"
@@ -32,7 +23,6 @@ resource "aws_eks_cluster" "this" {
   version  = var.cluster_version
 
   vpc_config {
-#    subnet_ids         = concat(module.vpc.public_subnet_ids, module.vpc.private_subnet_ids)
     subnet_ids          = module.vpc.private_subnet_ids
     security_group_ids  = [module.security_group.security_group_id]
   }
