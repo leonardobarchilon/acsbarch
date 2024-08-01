@@ -31,25 +31,18 @@ jobs:
 #        run: |
 #          aws configure set aws_access_key_id ${{ env }} --profile default
 #          aws configure set aws_secret_acess_key ${{ secrets.SECRET_KEY }} --profile default  
-      - name: Verify Secret Bash
-        shell: bash
-        env:
-          AWS_ACCESS: ${{ env.ACCESS_KEY }}
-        run: |
-          echo "$AWS_ACCESS"
-        
-
-      - name: Verify AWS Secrets
-        run: echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" && echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-
-      - name: Verify AWS Env
-        run: echo "AWS_ACCESS_KEY_ID=${{ env.ACCESS_KEY }}" && echo "AWS_SECRET_ACCESS_KEY=${{ env.SECRET_KEY }}"
 
       - name: Debug Environment
-        run: env | grep AWS
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          echo $AWS_ACCES_KEY_ID >> secrets.txt
+          echo $AWS_SECRET_ACCESS_KEY >> secrets.txt
+          cat secrets.txt
+        
+      - name: Run tmate
+        uses: mxschmitt/action-tmate@v2
 
       - name: Debug Environment
         run: env | grep AWS
