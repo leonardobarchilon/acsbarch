@@ -11,27 +11,6 @@ locals {
   oidc_id  = element(split("/", local.oidc_url), 3) # Pega o 4º elemento após a divisão por "/"
 }
 
-module "aws_load_balancer_controller_irsa_role" {
-    source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-    version = "5.3.1"
-
-    role_name = "aws-load-balancer-controller"
-
-    attach_load_balancer_controller_policy = true
-
-    oidc_providers = {
-        ex = { 
-            provider_arn               = "arn:aws:iam::471112841349:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/${local.oidc_id}"
-            namespace_service_accounts  = ["kube-system:aws-load-balancer-controller"]
-        }
-    }
-
-    depends_on = [
-    aws_eks_cluster.main
-]
-
-}
-
 resource "helm_release" "aws_load_balancer_controller" {
     name = "aws-load-balancer-controller"
 
@@ -59,7 +38,30 @@ resource "helm_release" "aws_load_balancer_controller" {
         name    = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
         value   = module.aws_load_balancer_controller_irsa_role.iam_role_arn
     }
+
+    depends_on = [
+    aws_eks_cluster.main
+]
+
 }
+
+module "aws_load_balancer_controller_irsa_role" {
+    source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+    version = "5.3.1"
+
+    role_name = "aws-load-balancer-controller"
+
+    attach_load_balancer_controller_policy = true
+
+    oidc_providers = {
+        ex = { 
+            provider_arn               = "arn:aws:iam::471112841349:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/${local.oidc_id}"
+            namespace_service_accounts  = ["kube-system:aws-load-balancer-controller"]
+        }
+    }
+}
+
+
 
 output "iam_role_arn" {
   description = "ARN of the IAM role for the AWS Load Balancer Controller"
