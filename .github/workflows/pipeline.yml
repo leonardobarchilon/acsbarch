@@ -5,11 +5,11 @@ on:
     branches:
       - main
   
-env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCES_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_DEFAULT_REGION: "us-east-1"
-  profile: "default"
+#env:
+#  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCES_KEY_ID }}
+#  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#  AWS_DEFAULT_REGION: "us-east-1"
+#  profile: "default"
 
 jobs:
   terraform:
@@ -19,47 +19,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
-#      - name: Configure AWS credentials
-#        uses: aws-actions/configure-aws-credentials@v1
-#        with:
-#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          aws-region: us-east-1
-
-
-#      - name: Configure AWS Credentials
-#        run: |
-#          aws configure set aws_access_key_id ${{ env }} --profile default
-#          aws configure set aws_secret_acess_key ${{ secrets.SECRET_KEY }} --profile default  
-
-      - name: Debug Environment
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          TEST: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g'
-          echo $TEST | sed 's/./& /g'
-          echo -n "${{ secrets.AWS_ACCESS_KEY_ID }}" >> foo && cut -c1-1 foo && cut -c 2- foo
-
-      - name: Debug environment with python
-        env:
-          TEST2: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          import os
-          for q in (os.getenv("TEST2")):
-            print(q)
-        shell: python 
-
-        
-#      - name: Run tmate
-#        uses: mxschmitt/action-tmate@v2
-
-      - name: Debug Environment
-        run: env | grep AWS
-        env:
-          AWS_ACCESS_KEY_ID: ${{ env.ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ env.SECRET_KEY }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
