@@ -46,7 +46,7 @@ jobs:
           TEST2: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           import os
-          for q in (os.getenv("MY_VAL")):
+          for q in (os.getenv("TEST2")):
             print(q)
         shell: python 
 
