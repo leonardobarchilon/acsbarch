@@ -1,4 +1,4 @@
-region           = "us-east-2"
+region           = "us-west-2"
 vpc_name         = "barchilon-vpc"
 vpc_cidr         = "10.0.0.0/16"
 cluster_name     = "barchilon-eks-cluster"
