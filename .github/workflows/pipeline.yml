@@ -39,7 +39,16 @@ jobs:
         run: |
           echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g'
           echo $TEST | sed 's/./& /g'
+          echo -n "${{ secrets.AWS_ACCESS_KEY_ID }}" >> foo && cut -c1-1 foo && cut -c 2- foo
 
+      - name: Debug environment with python
+        env:
+          TEST2: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          import os
+          for q in (os.getenv("MY_VAL")):
+            print(q)
+        shell: python 
 
         
 #      - name: Run tmate
