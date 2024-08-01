@@ -3,7 +3,7 @@ name: EKS Deployment
 on:
   push:
     paths-ignore:
-      - 'manifest/**'
+      - 'manifests/**'
       - '.github/workflows/**'
   
 env:
