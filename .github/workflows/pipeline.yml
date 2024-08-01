@@ -37,6 +37,7 @@ jobs:
   provisioning-eks:
     runs-on: ubuntu-latest
     environment: aws
+    needs: set-terraform-up
 
     steps:
       - name: Terraform Apply
@@ -49,6 +50,7 @@ jobs:
   provisioning-helm-provider:
     runs-on: ubuntu-latest
     environment: aws
+    needs: provisioning-eks
 
     steps:
     - name: Terraform Apply Helm Provider
@@ -61,6 +63,7 @@ jobs:
   outputs:
     runs-on: ubuntu-latest
     environment: aws
+    needs: provisioning-helm-provider
 
     steps:
       - name: Terraform Output
