@@ -17,7 +17,7 @@ module "iam" {
   source = "./modules/iam"
 }
 
-resource "aws_eks_cluster" "this" {
+resource "aws_eks_cluster" "main" {
   name     = var.cluster_name
   role_arn = module.iam.cluster_role_arn
   version  = var.cluster_version
