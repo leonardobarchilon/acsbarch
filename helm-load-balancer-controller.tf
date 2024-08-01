@@ -1,4 +1,4 @@
-data "aws_eks_cluster" "this" {
+data "aws_eks_cluster" "main" {
     name = var.cluster_name
 }
 
@@ -7,7 +7,7 @@ data "aws_eks_cluster_auth" "this" {
 }
 
 locals {
-  oidc_url = data.aws_eks_cluster.this.identity[0].oidc[0].issuer
+  oidc_url = data.aws_eks_cluster.main.identity[0].oidc[0].issuer
   oidc_id  = element(split("/", local.oidc_url), 3) # Pega o 4º elemento após a divisão por "/"
 }
 
