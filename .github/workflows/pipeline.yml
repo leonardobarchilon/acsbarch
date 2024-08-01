@@ -40,6 +40,17 @@ jobs:
     needs: set-terraform-up
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.9.3
+
+      - name: Terraform Init
+        run: terraform init
+
       - name: Terraform Apply
         run: terraform apply -auto-approve -var-file=terraform.tfvars
         working-directory: ./
@@ -53,12 +64,24 @@ jobs:
     needs: provisioning-eks
 
     steps:
-    - name: Terraform Apply Helm Provider
-      run: terraform apply -auto-approve -var-file=terraform.tfvars
-      working-directory: ./
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.9.3
+
+      - name: Terraform Init
+        run: terraform init
+    
+
+      - name: Terraform Apply Helm Provider
+        run: terraform apply -auto-approve -var-file=terraform.tfvars
+        working-directory: ./
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   outputs:
     runs-on: ubuntu-latest
@@ -66,6 +89,17 @@ jobs:
     needs: provisioning-helm-provider
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.9.3
+
+      - name: Terraform Init
+        run: terraform init
+    
       - name: Terraform Output
         run: terraform output
         working-directory: ./
