@@ -29,6 +29,17 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.50.3
+
+      - name: Init TFLint
+        run: tflint --init
+
+      - name: Run TFLint
+        run: tflint -f compact
+
   provisioning-eks:
     runs-on: ubuntu-latest
     environment: aws
