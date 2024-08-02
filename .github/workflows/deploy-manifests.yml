@@ -30,6 +30,8 @@ jobs:
 
     - name: Setup Kubectl
       uses: actions-hub/kubectl@master
+      env:
+        KUBE_CONFIG: "~/.kube/config"
 
     - name: Deploy each manifest
       run: |
