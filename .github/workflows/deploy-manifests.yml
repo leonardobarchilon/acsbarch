@@ -30,6 +30,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y awscli
 
+    - name: Return path to AWS bin
+      run: |
+        which aws
+
     - name: Update Kubeconfig
       run: aws eks update-kubeconfig --name barchilon-eks-cluster --region us-west-2
 
