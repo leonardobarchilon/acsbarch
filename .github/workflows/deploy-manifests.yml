@@ -4,8 +4,10 @@ on:
   push:
     paths:
       - 'manifests/**'
-    tags:
-      - deploy-manifests-trigger
+  workflow_run:
+    workflows: ["EKS Deployment"]
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -25,8 +27,6 @@ jobs:
 
     - name: Setup Kubectl
       uses: actions-hub/kubectl@master
-      with:
-        version: 'v1.30.3'
 
     - name: Update Kubeconfig
       run: aws eks update-kubeconfig --name barchilon-eks-cluster --region us-west-2
