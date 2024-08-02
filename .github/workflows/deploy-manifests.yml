@@ -25,11 +25,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-    - name: Setup Kubectl
-      uses: actions-hub/kubectl@master
-
     - name: Update Kubeconfig
       run: aws eks update-kubeconfig --name barchilon-eks-cluster --region us-west-2
+
+    - name: Setup Kubectl
+      uses: actions-hub/kubectl@master
 
     - name: Deploy each manifest
       run: |
