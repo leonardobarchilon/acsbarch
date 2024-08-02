@@ -25,17 +25,22 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-    - name: Export path to awscli
+#    - name: Export path to awscli
+#      run: |
+#        export PATH=$PATH:/usr/local/bin
+
+    - name: Configure kubectl
       run: |
-        export PATH=$PATH:/usr/local/bin
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
     - name: Update Kubeconfig
       run: aws eks update-kubeconfig --name barchilon-eks-cluster --region us-west-2
 
-    - name: Setup Kubectl
-      uses: actions-hub/kubectl@master
-      env:
-        KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+#    - name: Setup Kubectl
+#      uses: actions-hub/kubectl@master
+#      env:
+#        KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 
     - name: Deploy each manifest
       run: |
