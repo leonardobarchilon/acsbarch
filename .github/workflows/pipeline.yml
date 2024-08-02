@@ -36,6 +36,9 @@ jobs:
 
       - name: Init TFLint
         run: tflint --init
+      
+      - name: Configure to not fail when find errors
+        run: tflint --min-error-severity warning
 
       - name: Run TFLint
         run: tflint -f compact

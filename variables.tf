@@ -48,16 +48,16 @@ variable "min_size" {
   type        = number
 }
 
-# Variáveis para IAM roles
-#variable "cluster_role_name" {
-#  description = "The name of the IAM role for the EKS cluster"
-#  type        = string
-#  default     = "eks-cluster-role"
-#}
 
-#variable "node_role_name" {
-#  description = "The name of the IAM role for the EKS nodes"
-#  type        = string
-#  default     = "eks-node-role"
-#}
+variable "cluster_role_name" {
+  description = "The name of the IAM role for the EKS cluster"
+  type        = string
+  default     = "eks-cluster-role"
+}
+
+variable "node_role_name" {
+  description = "The name of the IAM role for the EKS nodes"
+  type        = string
+  default     = "eks-node-role"
+}
 
