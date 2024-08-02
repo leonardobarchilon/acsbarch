@@ -37,11 +37,8 @@ jobs:
       - name: Init TFLint
         run: tflint --init
       
-      - name: Configure to not fail when find errors
-        run: tflint --minimum-failure-severity=error
-
       - name: Run TFLint
-        run: tflint -f compact
+        run: tflint --minimum-failure-severity=error -f compact
 
   provisioning-eks:
     runs-on: ubuntu-latest
